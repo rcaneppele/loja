@@ -23,4 +23,10 @@
 			thousandsSeparator : '.'
 		});
 	})(jQuery);
+	
+	function confirmaExclusao(formId) {
+		if (confirm("Confirma a exclusão?")) {
+			document.querySelector("#" +formId).submit();
+		}
+	}
 </script>
