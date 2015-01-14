@@ -16,5 +16,11 @@
 				}
 			};
 		}
+		
+		$('.dinheiro').priceFormat({
+			prefix : '',
+			centsSeparator : ',',
+			thousandsSeparator : '.'
+		});
 	})(jQuery);
 </script>
