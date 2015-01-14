@@ -5,4 +5,9 @@
 	version="3.1">
 	<display-name>loja</display-name>
 	
+	<context-param>
+		<param-name>br.com.caelum.vraptor.encoding</param-name>
+		<param-value>UTF-8</param-value>
+	</context-param>
+	
 </web-app>
