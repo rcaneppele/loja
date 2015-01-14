@@ -1,0 +1,8 @@
+target
+bin
+build
+*.class
+.DS_Store
+src/main/webapp/WEB-INF/classes
+src/main/webapp/WEB-INF/lib/
+
