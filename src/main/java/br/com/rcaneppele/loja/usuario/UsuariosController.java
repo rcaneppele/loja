@@ -33,7 +33,7 @@ public class UsuariosController {
 		result.include("count", usuarioDao.count());
 	}
 	
-	@Post("/produtos/filtrar")
+	@Post("/usuarios/filtrar")
 	public void filtra(@NotBlank(message = "{login.obrigatorio}") String login) {
 		validator.onErrorRedirectTo(this).usuarios();
 		
