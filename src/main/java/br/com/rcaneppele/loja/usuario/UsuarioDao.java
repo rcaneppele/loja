@@ -19,6 +19,10 @@ public class UsuarioDao {
 	@Inject
 	private Paginacao paginacao;
 	
+	public void salva(Usuario usuario) {
+		manager.persist(usuario);
+	}
+	
 	public Usuario buscaPorLoginESenha(String login, String senha) {
 		String jpql = "FROM Usuario WHERE login = :login AND senha = :senha";
 		try {
