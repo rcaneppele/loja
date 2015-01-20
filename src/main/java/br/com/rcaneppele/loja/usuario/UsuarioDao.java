@@ -47,5 +47,12 @@ public class UsuarioDao {
 			return null;
 		}
 	}
+
+	public List<Usuario> buscaPorLoginLike(String login) {
+		String query = "FROM Usuario WHERE login LIKE LOWER(:login) ORDER BY login";
+		return manager.createQuery(query, Usuario.class)
+				.setParameter("login", "%" +login.toLowerCase() +"%")
+				.getResultList();
+	}
 	
 }
