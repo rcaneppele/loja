@@ -15,6 +15,7 @@ import br.com.caelum.vraptor.Put;
 import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.validator.I18nMessage;
 import br.com.caelum.vraptor.validator.Validator;
+import br.com.rcaneppele.loja.login.seguranca.Criptografia;
 
 @Controller
 public class UsuariosController {
@@ -30,6 +31,10 @@ public class UsuariosController {
 	
 	@Inject
 	private UsuarioDao usuarioDao;
+	
+	@Inject
+	private Criptografia criptografia;
+	
 	
 	@Get("/usuarios")
 	public void usuarios() {
@@ -59,7 +64,8 @@ public class UsuariosController {
 		redirecionaParaPaginaDeCadastroCasoOcorraErroDeValidacao(usuario);
 		
 		validaUsuarioJaCadastrado(usuario);
-
+		criptografaSenhaDoUsuario(usuario);
+		
 		usuarioDao.salva(usuario);
 		result.include("info", bundle.getString("info.cadastro.sucesso"));
 		result.redirectTo(this).usuarios();
@@ -76,6 +82,7 @@ public class UsuariosController {
 		redirecionaParaPaginaDeCadastroCasoOcorraErroDeValidacao(usuario);
 		
 		validaUsuarioJaCadastrado(usuario);
+		criptografaSenhaDoUsuario(usuario);
 
 		usuarioDao.altera(usuario);
 		result.include("info", bundle.getString("info.alteracao.sucesso"));
@@ -101,6 +108,11 @@ public class UsuariosController {
 		} else {
 			validator.onErrorRedirectTo(this).edita(usuario.getId());
 		}
+	}
+	
+	private void criptografaSenhaDoUsuario(Usuario usuario) {
+		String senhaCriptografada = criptografia.criptografa(usuario.getSenha(), usuario.getLogin());
+		usuario.setSenha(senhaCriptografada);
 	}
 	
 }
