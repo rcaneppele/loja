@@ -23,6 +23,15 @@ public class UsuarioDao {
 		manager.persist(usuario);
 	}
 	
+	public void altera(Usuario usuario) {
+		manager.merge(usuario);
+	}
+
+	public void remove(Usuario usuario) {
+		usuario = manager.getReference(Usuario.class, usuario.getId());
+		manager.remove(usuario);
+	}
+	
 	public Usuario buscaPorLoginESenha(String login, String senha) {
 		String jpql = "FROM Usuario WHERE login = :login AND senha = :senha";
 		try {
