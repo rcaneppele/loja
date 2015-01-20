@@ -8,6 +8,7 @@ import javax.validation.Valid;
 import org.hibernate.validator.constraints.NotBlank;
 
 import br.com.caelum.vraptor.Controller;
+import br.com.caelum.vraptor.Delete;
 import br.com.caelum.vraptor.Get;
 import br.com.caelum.vraptor.Post;
 import br.com.caelum.vraptor.Put;
@@ -78,6 +79,13 @@ public class UsuariosController {
 
 		usuarioDao.altera(usuario);
 		result.include("info", bundle.getString("info.alteracao.sucesso"));
+		result.redirectTo(this).usuarios();
+	}
+	
+	@Delete("/usuarios")
+	public void remove(Usuario usuario) {
+		usuarioDao.remove(usuario);
+		result.include("info", bundle.getString("info.remocao.sucesso"));
 		result.redirectTo(this).usuarios();
 	}
 	
