@@ -34,8 +34,8 @@ public class UsuarioDao {
 	public List<Usuario> buscaPaginada(int pagina) {
 		String query = "FROM Usuario ORDER BY login";
 		return manager.createQuery(query, Usuario.class)
-				.setFirstResult((pagina - 1) * paginacao.getPageSize())
-				.setMaxResults(paginacao.getPageSize())
+				.setFirstResult(paginacao.firstResult(pagina))
+				.setMaxResults(paginacao.pageSize())
 				.getResultList();
 	}
 	

@@ -35,8 +35,8 @@ public class ProdutoDao {
 	public List<Produto> buscaPaginada(int pagina) {
 		String query = "FROM Produto ORDER BY nome";
 		return em.createQuery(query, Produto.class)
-				.setFirstResult((pagina - 1) * paginacao.getPageSize())
-				.setMaxResults(paginacao.getPageSize())
+				.setFirstResult(paginacao.firstResult(pagina))
+				.setMaxResults(paginacao.pageSize())
 				.getResultList();
 	}
 	
