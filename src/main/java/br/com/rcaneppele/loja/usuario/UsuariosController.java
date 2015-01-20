@@ -77,7 +77,7 @@ public class UsuariosController {
 		result.forwardTo(this).novoUsuario();
 	}
 	
-	@Put("/usuario")
+	@Put("/usuarios")
 	public void altera(@Valid Usuario usuario) {
 		redirecionaParaPaginaDeCadastroCasoOcorraErroDeValidacao(usuario);
 		
