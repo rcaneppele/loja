@@ -33,6 +33,10 @@
 						<li>
 							<a href="<c:url value="/produtos" />">Produtos</a>
 						</li>
+						<li class="divider"></li>
+						<li>
+							<a href="<c:url value="/usuarios" />">Usuários</a>
+						</li>
 					</ul>
 				</li>
 				
