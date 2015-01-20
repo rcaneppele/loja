@@ -67,5 +67,18 @@ public class UsuarioDao {
 				.setParameter("login", "%" +login.toLowerCase() +"%")
 				.getResultList();
 	}
+
+	public Usuario buscaPorLogin(String login) {
+		String query = "FROM Usuario WHERE login = :login";
+		try {
+			return manager.createQuery(query, Usuario.class).setParameter("login", login).getSingleResult();
+		} catch (NoResultException e) {
+			return null;
+		}
+	}
+	
+	public Usuario buscaPorId(Long id) {
+		return manager.find(Usuario.class, id);
+	}
 	
 }
