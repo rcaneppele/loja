@@ -1,4 +1,4 @@
-package br.com.rcaneppele.loja.login;
+package br.com.rcaneppele.loja.usuario;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

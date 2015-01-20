@@ -13,6 +13,8 @@ import br.com.rcaneppele.loja.home.HomeController;
 import br.com.rcaneppele.loja.login.seguranca.AcessoPublico;
 import br.com.rcaneppele.loja.login.seguranca.Criptografia;
 import br.com.rcaneppele.loja.login.seguranca.Sessao;
+import br.com.rcaneppele.loja.usuario.Usuario;
+import br.com.rcaneppele.loja.usuario.UsuarioDao;
 
 @Controller
 @AcessoPublico

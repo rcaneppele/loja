@@ -5,7 +5,7 @@ import java.io.Serializable;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 
-import br.com.rcaneppele.loja.login.Usuario;
+import br.com.rcaneppele.loja.usuario.Usuario;
 
 @SessionScoped
 @Named
