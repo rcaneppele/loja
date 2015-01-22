@@ -66,7 +66,7 @@
 			
 			<ul class="nav navbar-nav navbar-right">
 				<li>
-					<a href="#">Logado como: ${sessao.usuario.login}</a>
+					<a href="<c:url value="/usuarios/meusdados" />">Logado como: ${sessao.usuario.login}</a>
 				</li>
 				<li>
 					<a href="<c:url value="/logout" />">Sair</a>
