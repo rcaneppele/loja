@@ -16,6 +16,7 @@ import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.validator.I18nMessage;
 import br.com.caelum.vraptor.validator.Validator;
 import br.com.rcaneppele.loja.login.seguranca.Criptografia;
+import br.com.rcaneppele.loja.login.seguranca.Sessao;
 
 @Controller
 public class UsuariosController {
@@ -34,6 +35,9 @@ public class UsuariosController {
 	
 	@Inject
 	private Criptografia criptografia;
+	
+	@Inject
+	private Sessao sessao;
 	
 	
 	@Get("/usuarios")
@@ -94,6 +98,28 @@ public class UsuariosController {
 		usuarioDao.remove(usuario);
 		result.include("info", bundle.getString("info.remocao.sucesso"));
 		result.redirectTo(this).usuarios();
+	}
+	
+	@Get("/usuarios/meusdados")
+	public void meusDados() {
+		result.include("usuario", sessao.getUsuario());
+	}
+	
+	@Post("/usuarios/meusdados")
+	public void atualizaMeusDados(String senhaAtual, String novaSenha, String confirmacaoNovaSenha) {
+		Usuario logado = sessao.getUsuario();
+		String senhaAtualCriptografada = criptografia.criptografa(senhaAtual, logado.getLogin());
+		
+		validator.addIf(!logado.getSenha().equals(senhaAtualCriptografada), new I18nMessage("error", "usuario.senha.invalida"));
+		validator.addIf(!novaSenha.equals(confirmacaoNovaSenha), new I18nMessage("error", "usuario.senhas.diferentes"));
+		validator.onErrorRedirectTo(this).meusDados();
+		
+		String novaSenhaCriptografada = criptografia.criptografa(novaSenha, logado.getLogin());
+		logado.setSenha(novaSenhaCriptografada);
+		usuarioDao.altera(logado);
+		
+		result.include("info", bundle.getString("info.alteracao.sucesso"));
+		result.of(this).meusDados();
 	}
 	
 	private void validaUsuarioJaCadastrado(Usuario usuario) {
